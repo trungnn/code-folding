@@ -1,32 +1,36 @@
 {
-  "name": "GitHub Code Folding",
-  "version": "0.3.3",
-  "description": "Enable code folding when viewing files in GitHub.",
-  "homepage_url": "https://github.com/noam3127/github-code-folding",
-  "manifest_version": 3,
-  "minimum_chrome_version": "88",
-  "author": "Noam Lustiger",
-  "short_name": "Github Code Folding",
-  "permissions": [
-    "scripting"
-  ],
-  "host_permissions": [
-    "*://github.com/*"
-  ],
-  "background": {
-    "service_worker": "background.js",
-    "type": "module"
-  },
-  "icons": {
-    "128": "images/icon-128.png"
-  },
-  "content_scripts": [{
-    "run_at" : "document_end",
-    "matches": [
-      "*://github.com/*"
-    ],
-    "css": [
-      "style.css"
-    ]
-  }]
+	"name": "Code Folding",
+	"version": "0.1.0",
+	"description": "Enable code folding when viewing files in GitHub/Sourcegraph.",
+	"homepage_url": "https://github.com/trungnn/code-folding",
+	"manifest_version": 3,
+	"minimum_chrome_version": "88",
+	"author": "Steven Nguyen",
+	"short_name": "Code Folding",
+	"permissions": [
+		"scripting"
+	],
+	"host_permissions": [
+		"*://github.com/*",
+		"*://sourcegraph.FILLME.com/*"
+	],
+	"background": {
+		"service_worker": "background.js",
+		"type": "module"
+	},
+	"icons": {
+		"128": "images/icon-128.png"
+	},
+	"content_scripts": [
+		{
+			"run_at": "document_end",
+			"matches": [
+				"*://github.com/*",
+				"*://sourcegraph.FILLME.com/*"
+			],
+			"css": [
+				"style.css"
+			]
+		}
+	]
 }

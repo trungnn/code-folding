@@ -27,11 +27,25 @@
         el.removeAttribute(classes.previouslyCollapsed);
     });
 
-    const codeLines = [...document.querySelectorAll('table.js-file-line-container tr .blob-code-inner')];
+    function getCodeLines() {
+        // Try to do this Github style first
+        const codeLines = [...document.querySelectorAll('table.js-file-line-container tr .blob-code-inner')];
+        if (codeLines.length > 0) {
+            return codeLines;
+        }
+
+        // Failure? Then try to do this SourceGraph style
+        return [...document.querySelectorAll('tr .code')].map((l, i) => {
+            l.id = `LC${i+1}`;
+            return l;
+        });
+    }
+
+    const codeLines = getCodeLines();
     const codeLinesText = codeLines.map((l) => l.textContent);
 
     const _arrow =
-        '<svg version="1.1" width="7px" fill="#969896" xmlns="http://www.w3.org/2000/svg" ' +
+        '<svg version="1.1" width="10px" fill="#969896" xmlns="http://www.w3.org/2000/svg" ' +
         'xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">' +
         '<metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>' +
         '<g><path d="M579.5,879.8c-43.7,75.7-115.3,75.7-159,0L28.7,201.1c-43.7-75.7-8-137.7,79.5-137.7h783.7c87.5,0,123.2,62,79.5,137.7L579.5,879.8z"></path></g>' +
